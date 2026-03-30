@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { phase1 } from "./data/phase1";
 import { phase2 } from "./data/phase2";
 import { phase3 } from "./data/phase3";
@@ -8,35 +8,34 @@ import { phase5 } from "./data/phase5";
 const curriculum = [...phase1, ...phase2, ...phase3, ...phase4, ...phase5];
 
 const phaseConfig = {
-  1: { color: "#00D4FF", label: "Foundation", emoji: "⚡" },
-  2: { color: "#FFB800", label: "AI Integration", emoji: "🧠" },
-  3: { color: "#00FF88", label: "Building", emoji: "🔨" },
-  4: { color: "#FF6B35", label: "Sales Mastery", emoji: "💰" },
-  5: { color: "#BF5FFF", label: "Mastery & Launch", emoji: "🚀" },
+  1: { color: "#0D9488", label: "Foundation", emoji: "01" },
+  2: { color: "#065F46", label: "AI Integration", emoji: "02" },
+  3: { color: "#064E3B", label: "Building Systems", emoji: "03" },
+  4: { color: "#115E59", label: "Sales Strategy", emoji: "04" },
+  5: { color: "#134E4A", label: "Mastery & Launch", emoji: "05" },
 };
 
-// --- SVG ICONS ---
 const Icons = {
   Menu: () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="3" y1="12" x2="21" y2="12"></line>
-      <line x1="3" y1="6" x2="21" y2="6"></line>
-      <line x1="3" y1="18" x2="21" y2="18"></line>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="4" y1="12" x2="20" y2="12"></line>
+      <line x1="4" y1="6" x2="20" y2="6"></line>
+      <line x1="4" y1="18" x2="20" y2="18"></line>
     </svg>
   ),
   Close: () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
       <line x1="18" y1="6" x2="6" y2="18"></line>
       <line x1="6" y1="6" x2="18" y2="18"></line>
     </svg>
   ),
   Check: () => (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="20 6 9 17 4 12"></polyline>
     </svg>
   ),
   Play: () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
       <polygon points="5 3 19 12 5 21 5 3"></polygon>
     </svg>
   )
@@ -47,228 +46,170 @@ export default function App() {
   const [completedDays, setCompletedDays] = useState(new Set());
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 1024);
   const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [showInstallToast, setShowInstallToast] = useState(false);
 
-  // --- PWA INSTALL LOGIC ---
   useEffect(() => {
-    const handleBeforeInstallPrompt = (e) => {
+    const handlePrompt = (e) => {
       e.preventDefault();
       setDeferredPrompt(e);
-      setShowInstallToast(true);
     };
-
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('beforeinstallprompt', handlePrompt);
+    return () => window.removeEventListener('beforeinstallprompt', handlePrompt);
   }, []);
 
-  const handleInstallClick = async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') {
-      setDeferredPrompt(null);
-      setShowInstallToast(false);
-    }
+  const toggleComplete = (id) => {
+    setCompletedDays(prev => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
   };
 
   const progress = Math.round((completedDays.size / 30) * 100);
   const pc = phaseConfig[activeDay.phase];
 
-  const toggleComplete = (dayId) => {
-    setCompletedDays(prev => {
-      const next = new Set(prev);
-      next.has(dayId) ? next.delete(dayId) : next.add(dayId);
-      return next;
-    });
-  };
-
   const renderLecture = (text) => {
     return text.split('\n').map((line, i) => {
       if (line.startsWith('**') && line.endsWith('**')) {
-        return <h3 key={i} style={{ color: 'var(--white-frosted)', fontSize: '1.4rem', margin: '2rem 0 1rem', fontFamily: 'var(--font-serif)' }}>{line.replace(/\*\*/g, '')}</h3>;
-      }
-      if (line.includes('**')) {
-        const parts = line.split(/\*\*(.*?)\*\*/g);
-        return <p key={i} style={{ lineHeight: '1.8', color: 'var(--gray-muted)', marginBottom: '1.2rem', fontSize: '1rem', fontWeight: 300 }}>
-          {parts.map((p, j) => j % 2 === 1 ? <strong key={j} style={{ color: 'var(--white-frosted)', fontWeight: 500 }}>{p}</strong> : p)}
-        </p>;
+        return <h2 key={i} className="magazine-header animate-reveal" style={{ fontSize: '2.5rem', marginTop: '3rem', marginBottom: '1.5rem', color: 'var(--titanium)' }}>{line.replace(/\*\*/g, '')}</h2>;
       }
       if (line.trim().startsWith('- ') || line.trim().startsWith('✅') || line.trim().startsWith('□')) {
-        return <div key={i} style={{ display: 'flex', gap: '12px', marginBottom: '0.8rem', color: 'var(--gray-muted)', fontSize: '1rem', fontWeight: 300, paddingLeft: '1rem' }}>
-          <span style={{ color: pc.color }}>▹</span> {line.trim().replace(/^[- ✅□] +/, '')}
+        return <div key={i} className="animate-reveal" style={{ padding: '0.75rem 0', borderBottom: '1px solid var(--border)', fontSize: '0.95rem', color: 'var(--gray-medium)', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <span style={{ color: 'var(--emerald)', fontSize: '1.2rem' }}>•</span> {line.trim().replace(/^[- ✅□] +/, '')}
         </div>;
       }
-      if (line.trim() === '') return <div key={i} style={{ height: '1rem' }} />;
-      return <p key={i} style={{ lineHeight: '1.8', color: 'var(--gray-muted)', marginBottom: '1.2rem', fontSize: '1rem', fontWeight: 300 }}>{line}</p>;
+      if (line.trim() === '') return <div key={i} style={{ height: '1.5rem' }} />;
+      return <p key={i} className="animate-reveal" style={{ fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--gray-medium)', marginBottom: '1.5rem', letterSpacing: '-0.01em' }}>{line}</p>;
     });
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', background: 'var(--background)', position: 'relative' }}>
-      {/* GLOBAL BACKGROUND ENHANCEMENTS */}
-      <div style={{ 
-        position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, 
-        backgroundImage: 'url(/src/assets/hero-bg.png)', 
-        backgroundSize: 'cover', backgroundPosition: 'center', 
-        opacity: 0.15, pointerEvents: 'none', zIndex: 0,
-        filter: 'grayscale(100%) contrast(120%)',
-        transform: 'scale(1.1)' 
-      }} />
-
-      {/* MOBILE HEADER */}
-      <header style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '70px', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 100, borderBottom: '1px solid var(--border)', background: 'rgba(5,5,5,0.8)', backdropFilter: 'blur(20px)' }}>
-        <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} style={{ background: 'none', border: 'none', color: 'var(--white-frosted)', cursor: 'pointer' }}>
-          <Icons.Menu />
-        </button>
-        <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 700 }}>JayKayDee Tech</div>
-        <div style={{ width: '24px' }}></div>
+    <div style={{ background: 'var(--background)', color: 'var(--titanium)', minHeight: '100vh', width: '100vw' }}>
+      {/* MINIMAL NAV */}
+      <header style={{ position: 'fixed', top: 0, width: '100%', height: '80px', borderBottom: '1px solid var(--border)', zIndex: 100, background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', padding: '0 3rem', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+          <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+            <Icons.Menu />
+          </button>
+          <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px' }}>JayKayDee Tech</div>
+        </div>
+        <div style={{ display: 'flex', gap: '3rem', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--gray-light)' }}>
+          <div>CURRICULUM v1.0</div>
+          <div>EST. 2024</div>
+        </div>
       </header>
 
-      {/* SIDEBAR NAVIGATION */}
-      <nav className="glass" style={{ 
-        position: window.innerWidth <= 1024 ? 'fixed' : 'relative',
-        left: isSidebarOpen ? 0 : '-320px',
-        width: '300px',
-        height: '100vh',
-        zIndex: 200,
-        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-        display: 'flex',
-        flexDirection: 'column',
-        borderRadius: 0,
-        borderTop: 'none',
-        borderBottom: 'none',
-        borderLeft: 'none'
-      }}>
-        <div style={{ padding: '32px 24px 16px', borderBottom: '1px solid var(--border)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', letterSpacing: '4px', color: 'var(--cyan)' }}>COLLECTION</div>
-             <button onClick={() => setIsSidebarOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--gray-muted)', cursor: 'pointer' }}>
-               <Icons.Close />
-             </button>
+      {/* SIDEBAR NAVIGATION (EDITORIAL STYLE) */}
+      <nav style={{ position: 'fixed', left: isSidebarOpen ? 0 : '-350px', top: '80px', bottom: 0, width: '350px', background: 'var(--background)', borderRight: '1px solid var(--border)', transition: 'left 0.4s cubic-bezier(0.4, 0, 0.2, 1)', zIndex: 90, display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: '3rem', borderBottom: '1px solid var(--border)' }}>
+          <div style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', color: 'var(--emerald)', marginBottom: '1rem' }}>EDITION / 01</div>
+          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.8rem', lineHeight: 1, marginBottom: '2rem' }}>AI Automation Roadmap</h3>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', fontFamily: 'var(--font-mono)', color: 'var(--gray-light)' }}>
+            <div>COMPLETION</div>
+            <div>{progress}%</div>
           </div>
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', marginBottom: '24px' }}>AI Roadmap</h2>
-          <div style={{ height: '2px', background: 'var(--gray-deep)', borderRadius: '2px', marginBottom: '12px' }}>
-            <div style={{ height: '100%', width: `${progress}%`, background: 'var(--cyan)', boxShadow: '0 0 10px var(--cyan-glow)', transition: 'width 1s ease' }} />
+          <div style={{ height: '1px', background: 'var(--border)', marginTop: '8px', position: 'relative' }}>
+             <div style={{ position: 'absolute', top: 0, left: 0, height: '1px', width: `${progress}%`, background: 'var(--emerald)' }} />
           </div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--gray-muted)' }}>{progress}% ARCHIVED</div>
         </div>
-
-        <div style={{ flex: 1, overflowY: 'auto', padding: '16px 8px' }}>
+        
+        <div style={{ flex: 1, overflowY: 'auto', padding: '1rem 0' }}>
           {curriculum.map(day => (
             <div 
               key={day.day} 
-              onClick={() => { setActiveDay(day); if(window.innerWidth <= 1024) setIsSidebarOpen(false); }}
-              className="glass-card" 
-              style={{ 
-                padding: '16px 16px', 
-                marginBottom: '4px', 
-                borderRadius: '12px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '16px',
-                background: activeDay.day === day.day ? 'var(--gray-deep)' : 'transparent',
-                border: `1px solid ${activeDay.day === day.day ? 'var(--border-light)' : 'transparent'}`
-              }}
+              className="sidebar-item" 
+              onClick={() => { setActiveDay(day); if(window.innerWidth < 1024) setIsSidebarOpen(false); }}
+              style={{ padding: '1.5rem 3rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '1.5rem', background: activeDay.day === day.day ? 'var(--surface-alt)' : 'transparent' }}
             >
-              <div onClick={(e) => { e.stopPropagation(); toggleComplete(day.day); }} style={{ 
-                width: '18px', height: '18px', borderRadius: '4px', border: `1.5px solid ${completedDays.has(day.day) ? 'var(--cyan)' : 'var(--gray-deep)'}`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center', background: completedDays.has(day.day) ? 'var(--cyan)' : 'transparent',
-                color: 'var(--background)', transition: 'all 0.3s'
-              }}>
+              <div style={{ width: '16px', height: '16px', border: `1px solid ${completedDays.has(day.day) ? 'var(--emerald)' : 'var(--border)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {completedDays.has(day.day) && <Icons.Check />}
               </div>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: '0.65rem', color: phaseConfig[day.phase].color, opacity: 0.8, marginBottom: '2px' }}>DAY {String(day.day).padStart(2, '0')}</div>
-                <div style={{ fontSize: '0.85rem', color: activeDay.day === day.day ? 'white' : 'var(--gray-muted)', textDecoration: completedDays.has(day.day) ? 'line-through' : 'none' }}>{day.title}</div>
+              <div>
+                <div style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', color: phaseConfig[day.phase].color }}>SECTION {phaseConfig[day.phase].emoji}</div>
+                <div style={{ fontSize: '0.9rem', color: activeDay.day === day.day ? 'black' : 'var(--gray-medium)', fontWeight: activeDay.day === day.day ? 600 : 400 }}>{day.title}</div>
               </div>
             </div>
           ))}
         </div>
       </nav>
 
-      {/* DASHBOARD CONTENT */}
-      <main style={{ flex: 1, overflowY: 'auto', padding: '100px 32px 64px', perspective: '1000px' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      {/* DASHBOARD CONTENT (ASYMMETRICAL GRID) */}
+      <main style={{ marginLeft: isSidebarOpen && window.innerWidth > 1024 ? '350px' : 0, transition: 'margin 0.4s ease', paddingTop: '80px' }}>
+        <div className="architectural-grid animate-reveal" style={{ padding: '0 6rem 6rem' }}>
           
-          {/* HEADER SECTION */}
-          <section className="animate-fade-in" style={{ marginBottom: '48px' }}>
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-              <span style={{ padding: '6px 12px', borderRadius: '100px', background: 'var(--gray-deep)', border: '1px solid var(--border)', fontSize: '0.7rem', fontFamily: 'var(--font-mono)', color: pc.color }}>{pc.emoji} {pc.label.toUpperCase()}</span>
-              <span style={{ padding: '6px 12px', borderRadius: '100px', background: 'var(--gray-deep)', border: '1px solid var(--border)', fontSize: '0.7rem', fontFamily: 'var(--font-mono)', color: 'var(--gray-muted)' }}>{activeDay.focus.toUpperCase()}</span>
+          {/* HEADER HERO SECTION */}
+          <div style={{ gridColumn: 'span 12', padding: '6rem 0' }}>
+            <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
+              <span style={{ fontSize: '0.7rem', border: '1px solid var(--border)', padding: '0.4rem 1rem', borderRadius: '100px', background: 'var(--emerald-light)', color: 'var(--emerald)', fontFamily: 'var(--font-mono)' }}>{pc.label.toUpperCase()}</span>
+              <span style={{ fontSize: '0.7rem', border: '1px solid var(--border)', padding: '0.4rem 1rem', borderRadius: '100px', color: 'var(--gray-light)', fontFamily: 'var(--font-mono)' }}>{activeDay.focus.toUpperCase()}</span>
             </div>
-            <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, marginBottom: '16px', lineHeight: 1 }}>
+            <h1 className="magazine-header" style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 900, color: 'var(--titanium)', maxWidth: '900px', marginBottom: '2rem' }}>
               {activeDay.title}
             </h1>
-            <p style={{ color: 'var(--gray-muted)', fontSize: '1.2rem', maxWidth: '600px', fontWeight: 300 }}>{activeDay.keyTakeaway}</p>
-          </section>
+            <div style={{ width: '120px', height: '2px', background: 'var(--emerald)', marginBottom: '4rem' }} />
+            <div style={{ width: '100%', height: '400px', backgroundImage: 'url(/src/assets/hero-light.png)', backgroundSize: 'cover', backgroundPosition: 'center', border: '1px solid var(--border)' }} />
+          </div>
 
-          {/* BENTO GRID */}
-          <div className="bento-grid">
+          {/* LECTURE (MAIN COLUMN) */}
+          <div style={{ gridColumn: 'span 7' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--emerald)', borderBottom: '1px solid var(--border)', paddingBottom: '1rem', marginBottom: '3rem' }}>ISSUE NO. {String(activeDay.day).padStart(2, '0')} / TRANSCRIPT</div>
+            {renderLecture(activeDay.lecture)}
+          </div>
+
+          {/* SIDEBAR (MAGAZINE STYLE) */}
+          <div style={{ gridColumn: 'span 4', gridColumnStart: 9, display: 'flex', flexDirection: 'column', gap: '4rem' }}>
             
-            {/* LECTURE MODULE */}
-            <div className="glass glass-card animate-fade-in" style={{ gridColumn: window.innerWidth > 768 ? 'span 8' : 'span 12', padding: '48px' }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--cyan)', letterSpacing: '4px', marginBottom: '32px' }}>01 / LECTURE</div>
-              {renderLecture(activeDay.lecture)}
+            {/* ACTION MODULE */}
+            <div className="brushed-aluminum" style={{ padding: '3rem' }}>
+              <div style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', color: 'var(--gray-light)', marginBottom: '1.5rem' }}>APPLICATION / EXECUTE</div>
+              <p style={{ fontSize: '1rem', color: 'var(--gray-medium)', lineHeight: 1.6, marginBottom: '2rem' }}>{activeDay.task}</p>
+              <button className="emerald-btn" onClick={() => toggleComplete(activeDay.day)} style={{ width: '100%', padding: '1.2rem', textTransform: 'uppercase', fontSize: '0.8rem' }}>
+                {completedDays.has(activeDay.day) ? 'TASK VERIFIED' : 'COMMIT ACTION'}
+              </button>
             </div>
 
-            {/* SIDEBAR MODULES */}
-            <div style={{ gridColumn: window.innerWidth > 768 ? 'span 4' : 'span 12', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-              
-              {/* VIDEO MODULE */}
-              <div className="glass glass-card animate-fade-in" style={{ padding: '32px' }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--cyan)', letterSpacing: '4px', marginBottom: '24px' }}>02 / VISUALS</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                  {activeDay.videos.map((v, i) => (
-                    <a key={i} href={v.url} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', gap: '16px', padding: '16px', borderRadius: '12px', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border)', textDecoration: 'none' }}>
-                      <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--gray-deep)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                         <Icons.Play />
-                      </div>
-                      <div>
-                        <div style={{ fontSize: '0.8rem', fontWeight: 500, color: 'white' }}>{v.title}</div>
-                        <div style={{ fontSize: '0.7rem', color: 'var(--gray-muted)' }}>{v.channel}</div>
-                      </div>
-                    </a>
-                  ))}
-                </div>
+            {/* VISUALS MODULE */}
+            <div>
+              <div style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', color: 'var(--emerald)', borderBottom: '1px solid var(--border)', paddingBottom: '1rem', marginBottom: '2rem' }}>MEDIA / VISUALS</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                {activeDay.videos.map((v, i) => (
+                  <a key={i} href={v.url} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', gap: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--border)', paddingBottom: '1.5rem', color: 'inherit' }}>
+                    <div style={{ width: '32px', height: '32px', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icons.Play /></div>
+                    <div>
+                      <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'black' }}>{v.title}</div>
+                      <div style={{ fontSize: '0.7rem', color: 'var(--gray-light)' }}>PLATFORM: YouTube / CHANNEL: {v.channel}</div>
+                    </div>
+                  </a>
+                ))}
               </div>
-
-              {/* ASSIGNMENT MODULE */}
-              <div className="glass glass-card animate-fade-in" style={{ padding: '32px', border: '1px solid var(--indigo)' }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--indigo)', letterSpacing: '4px', marginBottom: '24px' }}>03 / ACTION</div>
-                <p style={{ fontSize: '0.95rem', color: 'var(--gray-muted)', marginBottom: '32px', lineHeight: 1.6 }}>{activeDay.task}</p>
-                <button className="holographic-btn" onClick={() => toggleComplete(activeDay.day)} style={{ width: '100%', padding: '16px', borderRadius: '12px' }}>
-                  {completedDays.has(activeDay.day) ? 'SYSTEM ARCHIVED' : 'EXECUTE ASSIGNMENT'}
-                </button>
-              </div>
-
-              {/* RESOURCE MODULE */}
-              <a href={activeDay.resource} target="_blank" rel="noopener noreferrer" className="glass glass-card animate-fade-in" style={{ padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ fontSize: '0.85rem' }}>View Resources</div>
-                <div style={{ color: 'var(--cyan)' }}>→</div>
-              </a>
-
             </div>
+
+            {/* KEY TAKEAWAY */}
+            <div style={{ borderLeft: '4px solid var(--emerald)', paddingLeft: '2rem' }}>
+              <div style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', color: 'var(--emerald)', marginBottom: '1rem' }}>PRIMARY / OBJECTIVE</div>
+              <p style={{ fontSize: '1.1rem', fontFamily: 'var(--font-serif)', color: 'var(--titanium)', fontWeight: 700 }}>"{activeDay.keyTakeaway}"</p>
+            </div>
+
           </div>
         </div>
       </main>
 
-      {/* INSTALL TOAST */}
-      <div id="pwa-install-toast" className={`glass ${showInstallToast ? 'show' : ''}`} style={{ width: 'auto' }}>
-        <div style={{ fontSize: '0.9rem' }}>Install AI Roadmap for a premium mobile experience</div>
-        <button onClick={handleInstallClick} className="holographic-btn" style={{ padding: '8px 16px', borderRadius: '8px', fontSize: '0.8rem' }}>INSTALL</button>
-      </div>
-      
+      {/* PWA INSTALL PROMPT */}
+      {deferredPrompt && (
+        <div className="animate-reveal brushed-aluminum" style={{ position: 'fixed', bottom: '40px', right: '40px', padding: '1.5rem 2.5rem', zIndex: 1000, display: 'flex', gap: '2rem', alignItems: 'center' }}>
+          <div style={{ fontSize: '0.8rem', fontWeight: 600 }}>Install Archive Experience</div>
+          <button onClick={() => deferredPrompt.prompt()} className="emerald-btn" style={{ padding: '0.6rem 1.2rem', fontSize: '0.7rem' }}>INSTALL</button>
+        </div>
+      )}
+
       <style>{`
         @media (max-width: 1024px) {
-          main { padding-top: 120px; }
+          main { margin-left: 0 !important; }
+          .architectural-grid { padding: 3rem 1.5rem !important; }
+          header { padding: 0 1.5rem !important; }
+          div[style*="gridColumn: span 7"] { grid-column: span 12 !important; }
+          div[style*="gridColumn: span 4"] { grid-column: span 12 !important; grid-column-start: 1 !important; }
         }
       `}</style>
     </div>
   );
-}
-
-function hexToRgb(hex) {
-  const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return r ? `${parseInt(r[1],16)},${parseInt(r[2],16)},${parseInt(r[3],16)}` : "255,255,255";
 }
