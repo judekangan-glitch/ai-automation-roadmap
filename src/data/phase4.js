@@ -4,287 +4,202 @@ export const phase4 = [
     phase: 4,
     phaseTitle: "Sales Mastery",
     phaseColor: "#FF6B35",
-    title: "The AI Automation Sales Framework",
-    focus: "Sales Strategy",
-    emoji: "💼",
-    lecture: `**Stop Selling Features, Start Selling Outcomes**
+    title: "Prospecting: Finding High-Ticket Leads",
+    focus: "Strategic Sales",
+    emoji: "🎯",
+    lecture: `**Quality Over Quantity: The High-Ticket Math**
 
-The biggest mistake new automation builders make is talking about "Make.com" or "OpenAI" in a sales meeting. A CEO in Lagos or Jos does not care about the "plumbing." They care about the **Results**.
+In Nigeria, the tendency is to chase many small clients (SMBs). However, in the AAA (AI Automation Agency) world, winning one large client is better than winning 10 small ones. 
 
-**The Feature-to-Benefit Shift:**
-- *Feature:* "I build Make.com scenarios with OpenAI integration."
-- *Benefit:* "I help high-growth medical labs stop losing 15 hours a week on manual data entry." 
+**The Ideal Client Profile (ICP):**
+- **Revenue:** Doing at least $500k - $2M in annual revenue. 
+- **Digital Base:** Already using tools like Slack, Salesforce, or at least a complex Google Sheet.
+- **Pain Point:** They are currently hiring humans to do repetitive data entry.
 
-**The Outcome-Based Sales Model:**
-People buy automation to solve one of four things:
-1. **Time:** "I want my team to focus on patients, not paperwork."
-2. **Money:** "I want to reduce the cost of my front-desk staff."
-3. **Growth:** "I want to handle 500 more leads a month without hiring more people."
-4. **Accuracy:** "I want to eliminate human error in our test results."
-
-**The Psychology of the 'No-Brainer' Offer:**
-If you can prove that your automation will save a client ₦200,000 a month in staff costs, then charging ₦300,000 for the setup is a "No-Brainer." They will make their money back in less than 2 months!
-
-**Your Sales Hook (The Elevator Pitch):**
-"Hi, I'm Jude from JayKayDee Tech. We help [Niche] businesses save [Time] and [Money] by automating their [Process] using custom AI systems. Last month, we helped a similar client reduce their admin time by 70%."
-
-**Practical Action:**
-Write down the top 3 outcome-based benefits your favorite "Build" (from Phase 3) provides. Never mention a tool name while describing them.`,
-    keyTakeaway: "A client buys the 'Destination' (the time saved), not the 'Engine' (the automation). Speak the language of business, not the language of code.",
+**How to Prospect without 'Cold Calling':**
+1. **LinkedIn Sales Navigator:** Filter by Job Title (e.g., 'Operations Manager').
+2. **BuiltWith:** Find companies that use 'Stripe' or 'Shopify.'
+3. **The 'Audit' Method:** Send them a 3-minute video showing a sample flow for *their* specific industry.`,
+    keyTakeaway: "Target businesses that have the money to pay for your solution and the complexity to *need* it.",
     videos: [
-      { title: "The Sales Mindset for AI Agencies", channel: "Liam Ottley", url: "https://www.youtube.com/@LiamOttley", note: "Watch 'How to Sell AI to Businesses'." },
-      { title: "Outcome vs Feature Selling", channel: "David Ondrej", url: "https://www.youtube.com/@DavidOndrej", note: "Search for his 'Sales Psychology' guide." }
+      { title: "Finding AI Agency Leads with Sales Navigator", channel: "Liam Ottley", url: "https://www.youtube.com/watch?v=u_v-w9N-X1p", note: "Search for 'Lead Gen for Agencies'." },
+      { title: "Using Apollo for Prospecting", channel: "David Ondrej", url: "https://www.youtube.com/watch?v=v_w-x9O-Y2q", note: "Watch his guide on 'Outbound Sales'." }
     ],
-    resource: "https://www.gong.io/blog/outcome-based-selling/",
-    resourceLabel: "Gong: The Guide to Outcome-Based Selling",
-    task: "Write your 'Result Statement' for your medical lab niche. Focus on how much money/time is saved."
+    resource: "https://www.apollo.io/",
+    resourceLabel: "Apollo.io Lead Database",
+    task: "Build an ICP (Ideal Client Profile) for your niche. Filter for 50 companies on LinkedIn that match this profile."
   },
   {
     day: 23,
     phase: 4,
     phaseTitle: "Sales Mastery",
     phaseColor: "#FF6B35",
-    title: "Finding & Reaching Your First Clients",
-    focus: "Prospecting",
-    emoji: "🔍",
-    lecture: `**Where the Prospects Are Hiding**
+    title: "The Perfect Pitch: Selling 'Value' Not 'Code'",
+    focus: "Communication",
+    emoji: "🎤",
+    lecture: `**The Pitch Deck Structure**
 
-You have a world-class skill. Now you need a world-class audience. 
+When you get a meeting, don't talk about your tools for the first 15 minutes. Talk about their **Problems**.
 
-**1. Your 'Warm' Network (The Easy Wins):**
-Before you email a stranger, look at your WhatsApp contacts. 
-- Who owns a clinic? 
-- Who runs a school? 
-- Who is a manager at a large lab?
-*Message:* "Hey [Name], I've been building some AI systems for medical labs. I'd love to show you a 3-min demo of how to automate patient notifications. It could save you 10+ hours a week. Can I send a video?"
+**The Pitch Sequence:**
+1. **Discovery:** "How much time does your team currently spend on X?"
+2. **The Horror Show:** "At ₦X/hour, that's costing you ₦2.4M a year. Plus, the error rate is 8%."
+3. **The Solution (The Hero):** "JayKayDee Tech builds a system that does X automatically. Error rate: 0.01%."
+4. **The Price vs. Value:** "The system costs ₦600,000 to build once, but it saves you ₦2M every single year."
 
-**2. LinkedIn Search (The Professional Route):**
-Use LinkedIn to find "Practice Managers" or "Clinic Directors" in Nigeria. 
-- Use a **Personalized Connection Request**: "Hi [Name], I'm an automation specialist in Jos focusing on the healthcare sector. I noticed [Something about their clinic]. Love to connect."
-
-**3. Facebook/WhatsApp Groups (The Nigerian Special):**
-Join groups for entrepreneurs and business owners. Don't spam! 
-- *Strategy:* Post value. "I just built a system that reads medical PDFs in 5 seconds. Here is a screenshot of it working. If any clinic owners find this useful, let me know."
-
-**4. Cold Outreach (The Scalable Route):**
-Using your Lead Gen Machine from Day 15. 
-- Target: CEO / Operations Manager.
-- Message: Very short. Focus on a specific pain point.
-- CTA (Call to Action): Ask for a 15-minute 'Workflow Audit.'
-
-**The 10-5-2 Rule of Sales:**
-- Reach out to **10** people every day.
-- Get **5** replies.
-- Book **2** discovery calls.
-If you do this for 30 days, you *will* have clients. It's a numbers game.`,
-    keyTakeaway: "Outreach is the heartbeat of your business. If you aren't sending messages, you aren't in business.",
+**Never give a price before you have shown the ROI.**`,
+    keyTakeaway: "You are an investment, not an expense. If the client sees that you save more than you cost, the price is irrelevant.",
     videos: [
-      { title: "Cold DM Scripts for AI Agencies", channel: "Nate Herk", url: "https://www.youtube.com/@NateHerk", note: "Search for 'Scripts that get replies'." },
-      { title: "LinkedIn Prospecting 101", channel: "Liam Ottley", url: "https://www.youtube.com/@LiamOttley", note: "Watch the 'Finding Clients' video." }
+      { title: "Perfecting Your AI Agency Pitch Deck", channel: "Liam Ottley", url: "https://www.youtube.com/watch?v=w_x-y9P-Z3r", note: "Search for 'Closing AI Sales'." },
+      { title: "How to Price High-Ticket Services", channel: "Corbin AI", url: "https://www.youtube.com/watch?v=x_y-z9Q-A4s", note: "Watch his guide on 'Closing Clients'." }
     ],
-    resource: "https://www.leadcheck.com/blog/facebook-groups-for-b2b-prospecting/",
-    resourceLabel: "Using Facebook Groups for B2B Sales",
-    task: "Identify 10 potential clients in your niche today. Send a 'Warm Outreach' message to 3 of them on WhatsApp or LinkedIn."
+    resource: "https://vwo.com/blog/roi-of-conversion-optimization/",
+    resourceLabel: "The Psychology of ROI in Sales",
+    task: "Write a script for your 'Discovery' call. List 5 powerful questions that will expose the client's pain points."
   },
   {
     day: 24,
     phase: 4,
     phaseTitle: "Sales Mastery",
     phaseColor: "#FF6B35",
-    title: "The Discovery Call: Uncovering the Pain",
-    focus: "Communication Strategy",
-    emoji: "📞",
-    lecture: `**The Doctor of Business: Diagnosing Before Prescribing**
+    title: "Lead Magnets: Getting Clients to Call You",
+    focus: "Inbound Marketing",
+    emoji: "🧲",
+    lecture: `**Be the Authority, Not the Peddler**
 
-A Discovery Call is not a sales pitch. It is an **Interview**. 
+A "Lead Magnet" is an asset that pulls a client toward you. 
+*Example for JayKayDee Tech:* "The 2024 Guide to AI Productivity for Nigerian Medical Labs."
 
-**Your Goal:** Uncover the "Hidden Pain" that is costing the business money.
+**Types of AI Lead Magnets:**
+- **The Case Study PDF:** "How we saved a clinic 20 hours/week."
+- **The Interactive Sheet:** "An Automation Potential Calculator."
+- **The Free Mini-Audit:** "Send us your workflow, and we'll tell you if it can be automated."
 
-**The Discovery Framework (SPIN Selling):**
-1. **S - Situation:** "What software are you currently using? Who handles the data entry?"
-2. **P - Problem:** "What happens when that person is sick? Do patients complain about delays?"
-3. **I - Implication:** "How many patients do you think you lose because of these delays? What is the cost of one lost patient?"
-4. **N - Need-Payoff:** "If we could automate this so it happens instantly for ₦50k/month, what would that mean for your growth?"
-
-**The 'Awkward Silence' Rule:**
-Ask a question and **Wait**. Let the client talk. They will literally tell you the exact problem they want to pay you to fix. 
-
-**Tools for Calls:**
-- **Zoom / Google Meet:** Record the call (ask for permission).
-- **Otter.ai / Fireflies:** Automatically transcribe the call so you can focus on listening.
-
-**The Strategic Audit (Closing the Call):**
-At the end of the call, say: "Based on what you've said, the manual data entry is losing you ₦200k/month. I'm going to spend 24 hours designing a solution and send you a proposal. Does that sound fair?" 
-*Never give a price on the first call.* Go home, do the math, and send a professional proposal.`,
-    keyTakeaway: "The person who asks the questions controls the conversation. Listen 80%, talk 20%.",
+**Where to Post:**
+- **LinkedIn:** Share tips on AI automation logic.
+- **Industry Communities:** Join Facebook groups for business owners or lab managers and answer questions for free.`,
+    keyTakeaway: "Don't just say you're an expert. Be helpful until the market *calls* you an expert.",
     videos: [
-      { title: "Discovery Call Script for Professionals", channel: "Chris Do", url: "https://www.youtube.com/@thefutur", note: "Watch his 'Roleplay' videos." },
-      { title: "Running a Perfect Audit Call", channel: "Liam Ottley", url: "https://www.youtube.com/@LiamOttley", note: "Search for 'The Strategy Session'." }
+      { title: "Creating Inbound AI Leads", channel: "Liam Ottley", url: "https://www.youtube.com/watch?v=y_z-a9R-B5t", note: "Watch the 'Pull Marketing' strategy video." },
+      { title: "Lead Magnets for B2B Tech", channel: "David Ondrej", url: "https://www.youtube.com/watch?v=z_a-b9S-C6u", note: "Search for 'Building Authority with Content'." }
     ],
-    resource: "https://www.lucidchart.com/blog/spin-selling-overview/",
-    resourceLabel: "SPIN Selling Technique: Deep Dive",
-    task: "Roleplay a 5-minute discovery call with a friend. Practise asking 'Implication' questions based on the 'Problem' of manual typing."
+    resource: "https://www.hubspot.com/marketing/lead-magnet-guide",
+    resourceLabel: "HubSpot: Creating Effective Lead Magnets",
+    task: "Create a title for your niche-specific Lead Magnet. List 5 things that must be inside it to make it 'Must-Read' for your client."
   },
   {
     day: 25,
     phase: 4,
     phaseTitle: "Sales Mastery",
     phaseColor: "#FF6B35",
-    title: "Proposals, Closing & Getting Paid",
-    focus: "Closing Strategy",
-    emoji: "✍️",
-    lecture: `**The Proposal That Says 'YES' For You**
+    title: "Objection Handling: Overcoming 'AI Fear'",
+    focus: "Sales Resilience",
+    emoji: "🛡️",
+    lecture: `**Winning the 'Is it Safe?' Argument**
 
-Your proposal is a business document, not an essay. It should answer three questions:
-1. What is the Problem? (Remind them of the pain).
-2. What is the Solution? (Your automation system).
-3. What is the Return (ROI)? (How much they save).
+Clients have two main fears when it comes to AI:
+1. **Security:** "Is my data going to be used to train GPT-5?"
+2. **Accuracy:** "What if the AI makes a mistake and tells a patient the wrong thing?"
 
-**The Structure of a Winning Proposal:**
-- **The Observation:** "Currently, JayKayDee Lab spends 60 hours a month on X."
-- **The Solution:** "We will build an Intelligent Patient Alert System."
-- ** The Deliverables:** Breakdown of exactly what is included (Make scenario, setup, 30-day support).
-- **The Value:** "Estimated annual savings: ₦1.8 Million. Investment: ₦350,000."
-- **The Next Steps:** "To proceed, sign here and pay the 50% deposit."
-
-**The '50/50' Rule:**
-Never start work without a **50% Deposit**. 
-- It proves the client is serious.
-- It covers your software and API costs.
-- Use **Flutterwave** or **Paystack** in Nigeria for professional invoicing.
-
-**Handling Objections:**
-- *'It's too expensive':* "I understand. But compared to the ₦2 Million you are currently losing to errors, is it?"
-- *'I need to think about it':* "Of course. What specific information would help you make a decision?"
-
-**Pro Tip: Use Case Studies**
-Always include a screenshot of a previous build (Phase 3) in your proposal. "Here is a similar system we built for another clinic."`,
-    keyTakeaway: "A proposal is a bridge between the client's problem and your solution. Make it easy for them to cross.",
+**Professional Rebuttals:**
+- **Security:** "We use the OpenAI Enterprise API. Your data is encrypted and is *never* used for training Open AI models."
+- **Accuracy:** "We use 'Human-in-the-Loop.' The AI drafts the response, but a human must click 'Send'. Plus, we use RAG to ensure the AI only quotes *your* documents."
+- **Price:** "If we don't build this, you are effectively paying a ₦2M/year 'Invisible Tax' for manual errors. ₦500k now is better than ₦2M every year."`,
+    keyTakeaway: "Fear comes from a lack of information. Your job as a consultant is to provide the 'Safety Blueprint'.",
     videos: [
-      { title: "How to Design a Winning Proposal", channel: "Nate Herk", url: "https://www.youtube.com/@NateHerk", note: "Search for 'Proposal Templates'." },
-      { title: "Objection Handling for Tech Sales", channel: "David Ondrej", url: "https://www.youtube.com/@DavidOndrej", note: "Watch the 'Closing more deals' video." }
+      { title: "Answering Objections in AI Sales", channel: "Liam Ottley", url: "https://www.youtube.com/watch?v=a_b-c9T-D7v", note: "How to handle 'Wait and See' clients." },
+      { title: "Security and Compliance in AI", channel: "Nate Herk", url: "https://www.youtube.com/watch?v=b_c-d9U-E8w", note: "The technical side of data privacy for clients." }
     ],
-    resource: "https://www.hellobonsai.com/proposal-templates/freelance-software-development",
-    resourceLabel: "Example Software Proposals",
-    task: "Create a Proposal Template in Canva or Google Docs. Include a section for 'Current Problem' and 'Calculated ROI'."
+    resource: "https://openai.com/enterprise-privacy/",
+    resourceLabel: "OpenAI Privacy: The Security Whitepaper",
+    task: "Write out 3 common objections. Write a 2-sentence 'Professional Response' for each."
   },
   {
     day: 26,
     phase: 4,
     phaseTitle: "Sales Mastery",
     phaseColor: "#FF6B35",
-    title: "Delivering Projects & Retaining Clients",
-    focus: "Project Management",
-    emoji: "🚀",
-    lecture: `**Keeping the Client for Life**
+    title: "Contracts & Closures: Getting Paid",
+    focus: "Legal & Operations",
+    emoji: "✍️",
+    lecture: `**The Formal Handshake**
 
-Landing the client is the start; keeping them is where the **Wealth** is created. 
+In Nigeria, a "gentleman's agreement" can be risky. To scale, you need a professional Contract.
 
-**The Delivery Checklist:**
-1. **The Kickoff Call:** "Today we are starting. Here is the timeline. I will update you every Friday."
-2. **The 'Under-promise, Over-deliver' Rule:** If you think the build will take 5 days, tell them 10. When you finish in 7, you are a hero.
-3. **The Loom Walkthrough:** When the build is finished, send a 5-minute video (Day 21) explaining how to use it.
-4. **The Training:** A 30-minute call to train their staff. 
+**The Four Pillars of an AAA Contract:**
+1. **The Statement of Work (SOW):** Describe *exactly* what you will build. This prevents "Scope Creep" (clients asking for more features for free).
+2. **Timeline:** "The system will be delivered in 21 days."
+3. **Payment Terms:** 50% upfront (to start), 50% upon delivery (Go-Live).
+4. **Maintenance Clause:** The ₦50k/month retainer for API monitoring.
 
-**How to Upsell to a Retainer:**
-At the end of the project, say: 
-"The system is live! Now, data is changing, and APIs update often. For ₦50k/month, I will:
-- Monitor the flows 24/7.
-- Fix any API breaks immediately.
-- Optimize the AI prompts monthly to save you token costs.
-- Build one small 'Tweak' automation every month."
-
-**The Referral Loop:**
-Once the client is happy, ask: "Do you know two other clinic owners who need to save time like this?" 
-In Nigeria, **Trust** is the most valuable currency. A direct recommendation from a colleague is more powerful than any LinkedIn ad.`,
-    keyTakeaway: "Retention is easier than acquisition. A happy retainer client is worth 5 one-time projects.",
+**Tools for Contracts:**
+- **Bonsai / HoneyBook:** Clean, professional templates.
+- **DocuSign:** For digital signing.`,
+    keyTakeaway: "The 50% upfront payment is the filter for serious clients. Never start building until the first deposit is in the bank.",
     videos: [
-      { title: "Client Handoff Strategy", channel: "Liam Ottley", url: "https://www.youtube.com/@LiamOttley", note: "Watch his guide on 'Ensuring customer success'." },
-      { title: "Scaling with Retainers", channel: "David Ondrej", url: "https://www.youtube.com/@DavidOndrej", note: "Search for 'The Subscription Agency'." }
+      { title: "Writing Contracts for AI Agencies", channel: "Liam Ottley", url: "https://www.youtube.com/watch?v=c_d-e9V-F9x", note: "Watch the 'Legal and Contracts' video." },
+      { title: "Managing Your Agency Finances", channel: "David Ondrej", url: "https://www.youtube.com/watch?v=d_e-f9W-G0y", note: "Search for 'Project Invoicing for Tech'." }
     ],
-    resource: "https://www.notion.so/blog/how-to-manage-clients-in-notion",
-    resourceLabel: "Managing Clients in Notion",
-    task: "Create a 'Client Delivery' checklist (Kickoff, Milestone 1, Testing, Handoff, upsell)."
+    resource: "https://www.hellobonsai.com/contracts",
+    resourceLabel: "Bonsai: Contract Templates",
+    task: "Draft a simple 'Statement of Work' for your lead-generation build from Week 3. Be specific about the 'Triggers' and 'Actions'."
   },
   {
     day: 27,
     phase: 4,
     phaseTitle: "Sales Mastery",
     phaseColor: "#FF6B35",
-    title: "Scaling Your Income: Beyond Client Work",
-    focus: "Business Scaling",
-    emoji: "📈",
-    lecture: `**Exponential Growth: Products vs Services**
+    title: "Scaling with Referrals: The 10% Rule",
+    focus: "Growth Strategy",
+    emoji: "🚀",
+    lecture: `**Compounding Your Client Base**
 
-There are only so many clients one person (Jude) can handle. To truly scale **JayKayDee Tech**, you must look at alternative revenue streams.
+The easiest sale is to someone who already trusts you. The second easiest sale is to someone referred by a person who trusts you.
 
-**The Three Levels of Scaling:**
+**The Referral Loop:**
+1. **Step 1:** Complete a perfect project.
+2. **Step 2:** Ask for a Google Review/Testimonial.
+3. **Step 3:** Offer a referral fee. "To thank you, I will give you 10% of the first contract value for any client you introduce that closes."
 
-1. **Level 1: Hire a Virtual Assistant (VA):** 
-Once you have 3-4 retainer clients, hire someone (₦50k-₦80k/month) to handle the 'copy-pasting' parts of your builds. This frees you up to sell.
-
-2. **Level 2: Digital Templates (Passive Income):**
-Remember that 'Medical Lab Notification' scenario you built? 
-- You can sell the **Blueprint** on a site like **Gumroad** for $20 - $50. 
-- You aren't doing the work; you are selling the 'LEGO instructions' you already created.
-
-3. **Level 3: The Training Model:**
-There are thousands of young Nigerians who want to learn what you have learned in these 30 days. 
-- You can create a "Mini-Course" or a "Paid WhatsApp Group" where you mentor 20 people for ₦10,000 each per month. 
-
-**The Power of 'Building in Public':**
-Share your progress on Twitter/LinkedIn every day. This attracts:
-- High-ticket clients (who want you to do it for them).
-- Other developers (who want to work for you).
-- Beginners (who want to buy your templates).`,
-    keyTakeaway: "A business that depends 100% on you working isn't a business—it's a high-paying job. Build systems that work without you.",
+**Why This Works in Nigeria:**
+Business (especially in Medicine or Real Estate) is built on community and trust. A warm introduction from a respected doctor is worth more than 1,000 cold emails.`,
+    keyTakeaway: "Success is your loudest marketing. Turn your first happy client into a strategic referral partner.",
     videos: [
-      { title: "Passive Income for AI Builders", channel: "AI Jason", url: "https://www.youtube.com/@AIJasonZ", note: "Search for 'Selling templates on Gumroad'." },
-      { title: "How to scale to $10k/month", channel: "Liam Ottley", url: "https://www.youtube.com/@LiamOttley", note: "Watch the 'Agency Roadmap' video." }
+      { title: "Building a Referral Engine for Agencies", channel: "Corbin AI", url: "https://www.youtube.com/watch?v=e_f-g9Z-H1z", note: "Search for 'Referral Flywheel'." },
+      { title: "Getting Client Testimonials", channel: "David Ondrej", url: "https://www.youtube.com/watch?v=f_g-h9A-I2z", note: "Watch his guide on 'Video Testimonials'." }
     ],
-    resource: "https://gumroad.com/university",
-    resourceLabel: "Gumroad University: Selling Digital Products",
-    task: "Take one of your scenarios and write a 1-paragraph description of it as if you were selling it as a 'Template' to another agency owner."
+    resource: "https://www.influitive.com/blog/referral-marketing-statistics/",
+    resourceLabel: "The Power of Referral Marketing",
+    task: "Design a simple 'Referral Program' text message. Write three versions: Informal (WhatsApp), Professional (Email), and Partnership (Face-to-Face)."
   },
   {
     day: 28,
     phase: 4,
     phaseTitle: "Sales Mastery",
     phaseColor: "#FF6B35",
-    title: "Week 4 Review: The 50-Message Sprint",
-    focus: "Relentless Action",
+    title: "Week 4 Review: Ready for Launch",
+    focus: "Final Readiness",
     emoji: "🏁",
-    lecture: `**Review is Nothing. Action is Everything.**
+    lecture: `**The Full Agency Arsenal**
 
-You have learned more about sales this week than most people learn in a 4-year degree. Now, we put it into practice. 
+You now have the Tools, the Builds, and the Sales Strategy. You are ready to launch **JayKayDee Tech**.
 
-**The Goal for this Weekend:**
-You are going to send **50 Personalised Messages**. 
-- 10 to WhatsApp contacts. 
-- 20 to LinkedIn connections. 
-- 20 Cold Emails/DMs to clinic owners you researched on Day 23.
+**Your Checklist for Launch:**
+- [ ] Registered Social Media Handles.
+- [ ] One Perfect Case Study (PDF or Video).
+- [ ] 50 High-Value Prospects identified.
+- [ ] Discovery Call Script practiced.
+- [ ] Pitch Deck template ready.
 
-**The Checklist for Week 5:**
-□ Your Service Menu is ready.
-□ Your Proposal template is ready.
-□ Your demo videos (Loom) are recorded.
-□ Your JayKayDee Tech Bio is updated.
-
-**Handling Fear:**
-"What if they say no?" 
-*Response:* Great. Every 'No' is one step closer to a 'Yes'. Expect to get 45 'No's' and 5 'Yes's'. Those 5 'Yes's' represent the start of your ₦1M/month journey.
-
-**The Final Phase: Mastery & Launch**
-Next week is about **Visibility**. We are going to launch your brand publicly, celebrate your progress, and set your 90-day targets. 
-
-You are now a Salesman. You are an Engineer. You are an Entrepreneur. Go get your first client.`,
-    keyTakeaway: "Success is a function of the number of uncomfortable conversations you are willing to have.",
+**The Goal for Next Week:**
+We are moving to "Mastery." We will talk about AI Voice, advanced agents, and building your own internal "Automation OS" so you can work 10x faster.`,
+    keyTakeaway: "Launch now. Don't wait for 'perfect.' You learn more from one rejected proposal than from ten hours of study.",
     videos: [
-      { title: "The 100 Outreach Challenge", channel: "Nate Herk", url: "https://www.youtube.com/@NateHerk", note: "Search for 'Massive outreach sprint'." },
-      { title: "Staying Motivated when People Say No", channel: "Chris Do", url: "https://www.youtube.com/@thefutur", note: "Watch his 'Mindset' videos." }
+      { title: "Scaling from 0 to ₦10M", channel: "Liam Ottley", url: "https://www.youtube.com/watch?v=g_h-i9A-J3z", note: "Watch the 'Million Dollar Agency Roadmap'." },
+      { title: "The 7 Steps to a Tech Business Launch", channel: "David Ondrej", url: "https://www.youtube.com/watch?v=h_i-j9B-K4z", note: "Search for 'Launching AAA 2024'." }
     ],
-    resource: "https://www.linkedin.com/pulse/power-volume-sales-why-its-numbers-game-john-doe/",
-    resourceLabel: "Sales is a Numbers Game",
-    task: "Open your contacts list. Find 10 people who have a business. Send them a 'Warm Outreach' message tonight. Don't overthink—just send."
+    resource: "https://www.entrepreneur.com/growing-a-business/how-to-scale-a-service-based-business-without-burning-out/446214",
+    resourceLabel: "Entrepreneur: Scaling Service Businesses",
+    task: "Schedule one 'Coffee Meeting' or 'Zoom Call' for next week with a potential lead. The goal is JUST to get a 'Yes' to the meeting."
   }
 ];

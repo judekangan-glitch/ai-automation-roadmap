@@ -8,34 +8,34 @@ import { phase5 } from "./data/phase5";
 const curriculum = [...phase1, ...phase2, ...phase3, ...phase4, ...phase5];
 
 const phaseConfig = {
-  1: { color: "#0D9488", label: "Foundation", emoji: "01" },
-  2: { color: "#065F46", label: "AI Integration", emoji: "02" },
-  3: { color: "#064E3B", label: "Building Systems", emoji: "03" },
-  4: { color: "#115E59", label: "Sales Strategy", emoji: "04" },
-  5: { color: "#134E4A", label: "Mastery & Launch", emoji: "05" },
+  1: { color: "#00D4FF", label: "Foundation", emoji: "⚡" },
+  2: { color: "#FFB800", label: "AI Integration", emoji: "🧠" },
+  3: { color: "#00FF88", label: "Building", emoji: "🔨" },
+  4: { color: "#FF6B35", label: "Sales Mastery", emoji: "💰" },
+  5: { color: "#BF5FFF", label: "Mastery & Launch", emoji: "🚀" },
 };
 
 const Icons = {
   Menu: () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="4" y1="12" x2="20" y2="12"></line>
-      <line x1="4" y1="6" x2="20" y2="6"></line>
-      <line x1="4" y1="18" x2="20" y2="18"></line>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
     </svg>
   ),
   Close: () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <line x1="18" y1="6" x2="6" y2="18"></line>
       <line x1="6" y1="6" x2="18" y2="18"></line>
     </svg>
   ),
   Check: () => (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="20 6 9 17 4 12"></polyline>
     </svg>
   ),
   Play: () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polygon points="5 3 19 12 5 21 5 3"></polygon>
     </svg>
   )
@@ -70,147 +70,188 @@ export default function App() {
   const renderLecture = (text) => {
     return text.split('\n').map((line, i) => {
       if (line.startsWith('**') && line.endsWith('**')) {
-        return <h2 key={i} className="magazine-header animate-reveal" style={{ fontSize: '2.5rem', marginTop: '3rem', marginBottom: '1.5rem', color: 'var(--titanium)' }}>{line.replace(/\*\*/g, '')}</h2>;
+        return <h3 key={i} style={{ color: 'var(--white-high)', fontSize: 'var(--font-size-xl)', margin: '2.5rem 0 1.5rem', fontFamily: 'var(--font-header)', fontWeight: 800 }}>{line.replace(/\*\*/g, '')}</h3>;
+      }
+      if (line.includes('**')) {
+        const parts = line.split(/\*\*(.*?)\*\*/g);
+        return <p key={i} className="lecture-text" style={{ marginBottom: '1.5rem' }}>
+          {parts.map((p, j) => j % 2 === 1 ? <strong key={j}>{p}</strong> : p)}
+        </p>;
       }
       if (line.trim().startsWith('- ') || line.trim().startsWith('✅') || line.trim().startsWith('□')) {
-        return <div key={i} className="animate-reveal" style={{ padding: '0.75rem 0', borderBottom: '1px solid var(--border)', fontSize: '0.95rem', color: 'var(--gray-medium)', display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <span style={{ color: 'var(--emerald)', fontSize: '1.2rem' }}>•</span> {line.trim().replace(/^[- ✅□] +/, '')}
+        return <div key={i} style={{ display: 'flex', gap: '12px', marginBottom: '1rem', color: 'var(--white-muted)', fontSize: 'var(--font-size-base)', paddingLeft: '1rem' }}>
+          <span style={{ color: pc.color }}>▹</span> {line.trim().replace(/^[- ✅□] +/, '')}
         </div>;
       }
       if (line.trim() === '') return <div key={i} style={{ height: '1.5rem' }} />;
-      return <p key={i} className="animate-reveal" style={{ fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--gray-medium)', marginBottom: '1.5rem', letterSpacing: '-0.01em' }}>{line}</p>;
+      return <p key={i} className="lecture-text" style={{ marginBottom: '1.5rem' }}>{line}</p>;
     });
   };
 
   return (
-    <div style={{ background: '#ffffff', color: 'var(--titanium)', minHeight: '100vh', width: '100vw', position: 'relative' }}>
-      {/* MINIMAL NAV */}
-      <header style={{ position: 'fixed', top: 0, width: '100%', height: '80px', borderBottom: '1px solid var(--border)', zIndex: 100, background: 'rgba(255,255,255,1)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', padding: '0 3rem', justifyContent: 'space-between' }}>
+    <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', background: 'var(--background)' }}>
+      {/* GLOBAL BACKGROUND - REVERTED TO DARK */}
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'radial-gradient(circle at 50% 50%, #111 0%, #050505 100%)', zIndex: 0 }} />
+
+      {/* HEADER */}
+      <header style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '70px', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 100, borderBottom: '1px solid var(--border)', background: 'rgba(5,5,5,0.8)', backdropFilter: 'blur(20px)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+          <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
             <Icons.Menu />
           </button>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img src="/pwa-192x192.png" alt="Logo" style={{ width: '32px', height: '32px', borderRadius: '4px' }} />
-            <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px' }}>JayKayDee Tech</div>
+            <div className="header-title" style={{ fontSize: '1.2rem', color: 'white', textTransform: 'uppercase' }}>JayKayDee Tech</div>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: '3rem', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--gray-light)' }}>
-          <div>CURRICULUM v1.0</div>
-          <div>EST. 2024</div>
-        </div>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--white-muted)' }}>PHASE / {String(activeDay.phase).padStart(2, '0')}</div>
       </header>
 
-      {/* SIDEBAR NAVIGATION (EDITORIAL STYLE) */}
-      <nav style={{ position: 'fixed', left: isSidebarOpen ? 0 : '-350px', top: '80px', bottom: 0, width: '350px', background: 'var(--background)', borderRight: '1px solid var(--border)', transition: 'left 0.4s cubic-bezier(0.4, 0, 0.2, 1)', zIndex: 90, display: 'flex', flexDirection: 'column' }}>
-        <div style={{ padding: '3rem', borderBottom: '1px solid var(--border)' }}>
-          <div style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', color: 'var(--emerald)', marginBottom: '1rem' }}>EDITION / 01</div>
-          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.8rem', lineHeight: 1, marginBottom: '2rem' }}>AI Automation Roadmap</h3>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', fontFamily: 'var(--font-mono)', color: 'var(--gray-light)' }}>
-            <div>COMPLETION</div>
-            <div>{progress}%</div>
+      {/* SIDEBAR NAVIGATION */}
+      <nav className="glass" style={{ 
+        position: window.innerWidth <= 1024 ? 'fixed' : 'relative',
+        left: isSidebarOpen ? 0 : '-320px',
+        width: '300px',
+        height: '100vh',
+        zIndex: 200,
+        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        display: 'flex',
+        flexDirection: 'column',
+        borderRadius: 0,
+        borderTop: 'none',
+        borderBottom: 'none',
+        borderLeft: 'none',
+        paddingTop: '70px'
+      }}>
+        <div style={{ padding: '24px', borderBottom: '1px solid var(--border)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', letterSpacing: '4px', color: 'var(--cyan)' }}>AI ROADMAP</div>
+             <button onClick={() => setIsSidebarOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--white-muted)', cursor: 'pointer' }}>
+               <Icons.Close />
+             </button>
           </div>
-          <div style={{ height: '1px', background: 'var(--border)', marginTop: '8px', position: 'relative' }}>
-             <div style={{ position: 'absolute', top: 0, left: 0, height: '1px', width: `${progress}%`, background: 'var(--emerald)' }} />
+          <div style={{ height: '3px', background: 'rgba(255,255,255,0.05)', borderRadius: '10px', marginBottom: '10px' }}>
+            <div style={{ height: '100%', width: `${progress}%`, background: 'var(--cyan)', boxShadow: '0 0 15px var(--cyan)', transition: 'width 1s ease' }} />
           </div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--white-muted)' }}>ARCHIVE COMPLETION: {progress}%</div>
         </div>
-        
-        <div style={{ flex: 1, overflowY: 'auto', padding: '1rem 0' }}>
+
+        <div style={{ flex: 1, overflowY: 'auto', padding: '16px 8px' }}>
           {curriculum.map(day => (
             <div 
               key={day.day} 
+              onClick={() => { setActiveDay(day); if(window.innerWidth <= 1024) setIsSidebarOpen(false); }}
               className="sidebar-item" 
-              onClick={() => { setActiveDay(day); if(window.innerWidth < 1024) setIsSidebarOpen(false); }}
-              style={{ padding: '1.5rem 3rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '1.5rem', background: activeDay.day === day.day ? 'var(--surface-alt)' : 'transparent' }}
+              style={{ 
+                padding: '16px 16px', 
+                marginBottom: '4px', 
+                borderRadius: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                background: activeDay.day === day.day ? 'rgba(255,255,255,0.05)' : 'transparent',
+                border: `1px solid ${activeDay.day === day.day ? 'rgba(255,255,255,0.1)' : 'transparent'}`
+              }}
             >
-              <div style={{ width: '16px', height: '16px', border: `1px solid ${completedDays.has(day.day) ? 'var(--emerald)' : 'var(--border)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div onClick={(e) => { e.stopPropagation(); toggleComplete(day.day); }} style={{ 
+                width: '18px', height: '18px', borderRadius: '4px', border: `1.5px solid ${completedDays.has(day.day) ? 'var(--cyan)' : 'rgba(255,255,255,0.1)'}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', background: completedDays.has(day.day) ? 'var(--cyan)' : 'transparent',
+                color: 'var(--background)', transition: 'all 0.3s'
+              }}>
                 {completedDays.has(day.day) && <Icons.Check />}
               </div>
-              <div>
-                <div style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', color: phaseConfig[day.phase].color }}>SECTION {phaseConfig[day.phase].emoji}</div>
-                <div style={{ fontSize: '0.9rem', color: activeDay.day === day.day ? 'black' : 'var(--gray-medium)', fontWeight: activeDay.day === day.day ? 600 : 400 }}>{day.title}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: '0.65rem', color: phaseConfig[day.phase].color, opacity: 1, marginBottom: '2px', fontWeight: 600 }}>DAY {String(day.day).padStart(2, '0')} / {phaseConfig[day.phase].label.toUpperCase()}</div>
+                <div style={{ fontSize: '0.95rem', color: activeDay.day === day.day ? 'white' : 'var(--white-muted)', textDecoration: completedDays.has(day.day) ? 'line-through' : 'none', fontWeight: activeDay.day === day.day ? 600 : 400 }}>{day.title}</div>
               </div>
             </div>
           ))}
         </div>
       </nav>
 
-      {/* DASHBOARD CONTENT (ASYMMETRICAL GRID) */}
-      <main style={{ marginLeft: isSidebarOpen && window.innerWidth > 1024 ? '350px' : 0, transition: 'margin 0.4s ease', paddingTop: '80px' }}>
-        <div className="architectural-grid animate-reveal" style={{ padding: '0 6rem 6rem' }}>
+      {/* DASHBOARD CONTENT (BENTO BOX PATTERN) */}
+      <main style={{ flex: 1, overflowY: 'auto', padding: '100px 32px 64px', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           
-          {/* HEADER HERO SECTION */}
-          <div style={{ gridColumn: 'span 12', padding: '6rem 0' }}>
-            <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
-              <span style={{ fontSize: '0.7rem', border: '1px solid var(--border)', padding: '0.4rem 1rem', borderRadius: '100px', background: 'var(--emerald-light)', color: 'var(--emerald)', fontFamily: 'var(--font-mono)' }}>{pc.label.toUpperCase()}</span>
-              <span style={{ fontSize: '0.7rem', border: '1px solid var(--border)', padding: '0.4rem 1rem', borderRadius: '100px', color: 'var(--gray-light)', fontFamily: 'var(--font-mono)' }}>{activeDay.focus.toUpperCase()}</span>
+          {/* HEADER SECTION */}
+          <section className="animate-fade-in" style={{ marginBottom: '40px' }}>
+            <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+              <span style={{ padding: '6px 14px', borderRadius: '100px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: pc.color, fontWeight: 600 }}>DAY {activeDay.day} / {pc.emoji} {pc.label.toUpperCase()}</span>
+              <span style={{ padding: '6px 14px', borderRadius: '100px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--white-muted)' }}>{activeDay.focus.toUpperCase()}</span>
             </div>
-            <h1 className="magazine-header" style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 900, color: 'var(--titanium)', maxWidth: '900px', marginBottom: '2rem' }}>
+            <h1 className="header-title" style={{ fontSize: 'var(--font-size-huge)', marginBottom: '20px', color: 'white' }}>
               {activeDay.title}
             </h1>
-            <div style={{ width: '120px', height: '2px', background: 'var(--emerald)', marginBottom: '4rem' }} />
-            <div style={{ width: '100%', height: '400px', backgroundImage: 'url(/src/assets/hero-light.png)', backgroundSize: 'cover', backgroundPosition: 'center', border: '1px solid var(--border)' }} />
-          </div>
+            <p style={{ color: 'var(--white-muted)', fontSize: '1.25rem', maxWidth: '750px', fontWeight: 300, lineHeight: 1.6 }}>{activeDay.keyTakeaway}</p>
+          </section>
 
-          {/* LECTURE (MAIN COLUMN) */}
-          <div style={{ gridColumn: 'span 7' }}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--emerald)', borderBottom: '1px solid var(--border)', paddingBottom: '1rem', marginBottom: '3rem' }}>ISSUE NO. {String(activeDay.day).padStart(2, '0')} / TRANSCRIPT</div>
-            {renderLecture(activeDay.lecture)}
-          </div>
-
-          {/* SIDEBAR (MAGAZINE STYLE) */}
-          <div style={{ gridColumn: 'span 4', gridColumnStart: 9, display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+          {/* BENTO GRID (ORIGINAL PATTERN) */}
+          <div className="bento-grid">
             
-            {/* ACTION MODULE */}
-            <div className="brushed-aluminum" style={{ padding: '3rem' }}>
-              <div style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', color: 'var(--gray-light)', marginBottom: '1.5rem' }}>APPLICATION / EXECUTE</div>
-              <p style={{ fontSize: '1rem', color: 'var(--gray-medium)', lineHeight: 1.6, marginBottom: '2rem' }}>{activeDay.task}</p>
-              <button className="emerald-btn" onClick={() => toggleComplete(activeDay.day)} style={{ width: '100%', padding: '1.2rem', textTransform: 'uppercase', fontSize: '0.8rem' }}>
-                {completedDays.has(activeDay.day) ? 'TASK VERIFIED' : 'COMMIT ACTION'}
-              </button>
+            {/* LECTURE MODULE (SPAN 8) */}
+            <div className="glass animate-fade-in" style={{ gridColumn: window.innerWidth > 768 ? 'span 8' : 'span 12', padding: '48px', overflowX: 'hidden' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--cyan)', letterSpacing: '4px', marginBottom: '40px', borderLeft: '3px solid var(--cyan)', paddingLeft: '15px' }}>01 / CORE CURRICULUM</div>
+              {renderLecture(activeDay.lecture)}
             </div>
 
-            {/* VISUALS MODULE */}
-            <div>
-              <div style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', color: 'var(--emerald)', borderBottom: '1px solid var(--border)', paddingBottom: '1rem', marginBottom: '2rem' }}>MEDIA / VISUALS</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                {activeDay.videos.map((v, i) => (
-                  <a key={i} href={v.url} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', gap: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--border)', paddingBottom: '1.5rem', color: 'inherit' }}>
-                    <div style={{ width: '32px', height: '32px', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icons.Play /></div>
-                    <div>
-                      <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'black' }}>{v.title}</div>
-                      <div style={{ fontSize: '0.7rem', color: 'var(--gray-light)' }}>PLATFORM: YouTube / CHANNEL: {v.channel}</div>
-                    </div>
-                  </a>
-                ))}
+            {/* SIDEBAR MODULES (SPAN 4) */}
+            <div style={{ gridColumn: window.innerWidth > 768 ? 'span 4' : 'span 12', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+              
+              {/* VIDEO MODULE (UPGRADED) */}
+              <div className="glass animate-fade-in" style={{ padding: '32px' }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--cyan)', letterSpacing: '4px', marginBottom: '24px' }}>02 / VIDEO RESOURCES</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  {activeDay.videos.map((v, i) => (
+                    <a key={i} href={v.url} target="_blank" rel="noopener noreferrer" style={{ display: 'block', padding: '20px', borderRadius: '16px', background: 'rgba(0,0,0,0.3)', border: '1px solid var(--border)', textDecoration: 'none', transition: 'all 0.3s ease' }} className="sidebar-item">
+                      <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '12px' }}>
+                        <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(0,212,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                           <Icons.Play />
+                        </div>
+                        <div style={{ fontSize: '1rem', fontWeight: 700, color: 'white', lineHeight: 1.3 }}>{v.title}</div>
+                      </div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--white-muted)', display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '10px' }}>
+                        <span>CHANNEL: {v.channel.toUpperCase()}</span>
+                        <span style={{ color: 'var(--cyan)' }}>WATCH NOW →</span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {/* KEY TAKEAWAY */}
-            <div style={{ borderLeft: '4px solid var(--emerald)', paddingLeft: '2rem' }}>
-              <div style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', color: 'var(--emerald)', marginBottom: '1rem' }}>PRIMARY / OBJECTIVE</div>
-              <p style={{ fontSize: '1.1rem', fontFamily: 'var(--font-serif)', color: 'var(--titanium)', fontWeight: 700 }}>"{activeDay.keyTakeaway}"</p>
-            </div>
+              {/* ASSIGNMENT MODULE */}
+              <div className="glass animate-fade-in" style={{ padding: '32px', border: '1px solid rgba(99, 102, 241, 0.3)' }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--indigo)', letterSpacing: '4px', marginBottom: '24px' }}>03 / EXECUTION PHASE</div>
+                <p style={{ fontSize: '1.15rem', color: 'var(--white-muted)', marginBottom: '32px', lineHeight: 1.6, fontWeight: 400 }}>{activeDay.task}</p>
+                <button className="holographic-btn" onClick={() => toggleComplete(activeDay.day)} style={{ width: '100%', padding: '20px', borderRadius: '12px' }}>
+                  {completedDays.has(activeDay.day) ? 'SYSTEM ARCHIVED ✓' : 'EXECUTE ASSIGNMENT'}
+                </button>
+              </div>
 
+              {/* RESOURCE ACCESS */}
+              <a href={activeDay.resource} target="_blank" rel="noopener noreferrer" className="glass animate-fade-in sidebar-item" style={{ padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', textDecoration: 'none' }}>
+                <div style={{ fontSize: '1rem', color: 'white', fontWeight: 600 }}>{activeDay.resourceLabel || 'Premium Library Access'}</div>
+                <div style={{ color: 'var(--cyan)', fontSize: '1.2rem' }}>↗</div>
+              </a>
+
+            </div>
           </div>
         </div>
       </main>
 
-      {/* PWA INSTALL PROMPT */}
+      {/* PWA INSTALLATION HOVER */}
       {deferredPrompt && (
-        <div className="animate-reveal brushed-aluminum" style={{ position: 'fixed', bottom: '40px', right: '40px', padding: '1.5rem 2.5rem', zIndex: 1000, display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <div style={{ fontSize: '0.8rem', fontWeight: 600 }}>Install Archive Experience</div>
-          <button onClick={() => deferredPrompt.prompt()} className="emerald-btn" style={{ padding: '0.6rem 1.2rem', fontSize: '0.7rem' }}>INSTALL</button>
+        <div id="pwa-install-toast" className="glass show animate-fade-in" style={{ width: 'auto', background: 'rgba(10,10,10,0.95)', border: '1px solid var(--cyan)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <div style={{ fontSize: '0.95rem', fontWeight: 500 }}>Install AI Roadmap as a standalone application</div>
+            <button onClick={() => deferredPrompt.prompt()} className="holographic-btn" style={{ padding: '10px 24px', borderRadius: '8px', fontSize: '0.85rem' }}>INSTALL</button>
+          </div>
         </div>
       )}
-
+      
       <style>{`
         @media (max-width: 1024px) {
-          main { margin-left: 0 !important; }
-          .architectural-grid { padding: 3rem 1.5rem !important; }
-          header { padding: 0 1.5rem !important; }
-          div[style*="gridColumn: span 7"] { grid-column: span 12 !important; }
-          div[style*="gridColumn: span 4"] { grid-column: span 12 !important; grid-column-start: 1 !important; }
+          main { padding-top: 100px; padding-left: 20px; padding-right: 20px; }
+          .bento-grid { gap: 1rem; }
         }
       `}</style>
     </div>

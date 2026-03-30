@@ -12,8 +12,8 @@ export default defineConfig({
         name: 'AI Automation Roadmap',
         short_name: 'AI Roadmap',
         description: '30-Day AI Automation Mastery Course by JayKayDee Tech',
-        theme_color: '#ffffff',
-        background_color: '#ffffff',
+        theme_color: '#050505',
+        background_color: '#050505',
         display: 'standalone',
         orientation: 'portrait',
         icons: [
