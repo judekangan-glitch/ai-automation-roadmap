@@ -89,10 +89,7 @@ export default function App() {
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', background: 'var(--background)' }}>
-      {/* GLOBAL BACKGROUND - REVERTED TO DARK */}
-      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'radial-gradient(circle at 50% 50%, #111 0%, #050505 100%)', zIndex: 0 }} />
-
+    <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', backgroundColor: '#050505', color: 'var(--white-high)', position: 'relative' }}>
       {/* HEADER */}
       <header style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '70px', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 100, borderBottom: '1px solid var(--border)', background: 'rgba(5,5,5,0.8)', backdropFilter: 'blur(20px)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
