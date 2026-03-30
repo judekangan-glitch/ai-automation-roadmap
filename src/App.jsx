@@ -83,14 +83,17 @@ export default function App() {
   };
 
   return (
-    <div style={{ background: 'var(--background)', color: 'var(--titanium)', minHeight: '100vh', width: '100vw' }}>
+    <div style={{ background: '#ffffff', color: 'var(--titanium)', minHeight: '100vh', width: '100vw', position: 'relative' }}>
       {/* MINIMAL NAV */}
-      <header style={{ position: 'fixed', top: 0, width: '100%', height: '80px', borderBottom: '1px solid var(--border)', zIndex: 100, background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', padding: '0 3rem', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+      <header style={{ position: 'fixed', top: 0, width: '100%', height: '80px', borderBottom: '1px solid var(--border)', zIndex: 100, background: 'rgba(255,255,255,1)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', padding: '0 3rem', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
             <Icons.Menu />
           </button>
-          <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px' }}>JayKayDee Tech</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <img src="/pwa-192x192.png" alt="Logo" style={{ width: '32px', height: '32px', borderRadius: '4px' }} />
+            <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px' }}>JayKayDee Tech</div>
+          </div>
         </div>
         <div style={{ display: 'flex', gap: '3rem', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--gray-light)' }}>
           <div>CURRICULUM v1.0</div>
